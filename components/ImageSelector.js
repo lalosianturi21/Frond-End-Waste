@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, SafeAreaView } from 'react-native';
 import { Button } from 'react-native-paper';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 
@@ -35,14 +35,26 @@ const ImageSelector = ({ setImageUri, setClassificationResult }) => {
   };
 
   return (
-    <View style={styles.buttonContainer}>
-      <Button mode="contained" icon="image" style={styles.button} onPress={selectImage}>
-        Pilih dari Galeri
-      </Button>
-      <Button mode="contained" icon="camera" style={styles.button} onPress={captureImage}>
-        Ambil dari Kamera
-      </Button>
-    </View>
+    <SafeAreaView>
+      <View style={styles.buttonContainer}>
+        <Button
+          mode="contained"
+          icon="image"
+          style={styles.button}
+          onPress={selectImage}
+        >
+          Select from Gallery
+        </Button>
+        <Button
+          mode="contained"
+          icon="camera"
+          style={styles.button}
+          onPress={captureImage}
+        >
+          Take from Camera
+        </Button>
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -51,10 +63,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginBottom: 20,
+    paddingHorizontal: 20, // Menambahkan padding horizontal
   },
   button: {
-    marginHorizontal: 5,
+    marginHorizontal: 10, // Meningkatkan jarak antar tombol
     borderRadius: 5,
+    flex: 1, // Membuat tombol mengisi ruang yang tersedia secara merata
   },
 });
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 import axios from 'axios';
 import { Provider as PaperProvider, Appbar, Headline, Caption, Button, Card } from 'react-native-paper';
 import ImageSelector from './components/ImageSelector';
@@ -13,7 +13,7 @@ const ImageClassifier = () => {
 
   const classifyImage = async () => {
     if (!imageUri) {
-      alert('Pilih atau ambil gambar terlebih dahulu!');
+      alert('Please select or capture an image first!');
       return;
     }
 
@@ -26,18 +26,22 @@ const ImageClassifier = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('https://amh-project-backend-waste-8a2b6e4b7d57.herokuapp.com/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      const response = await axios.post(
+        'https://amh-project-backend-waste-8a2b6e4b7d57.herokuapp.com/upload',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
 
       if (response.data && response.data.results) {
         setClassificationResult(response.data.results[0]);
       }
     } catch (error) {
-      console.error('Error saat mengirim gambar:', error);
-      alert('Terjadi kesalahan dalam mengklasifikasi gambar.');
+      console.error('Error when sending the image:', error);
+      alert('An error occurred while classifying the image.');
     } finally {
       setLoading(false);
     }
@@ -46,17 +50,18 @@ const ImageClassifier = () => {
   return (
     <PaperProvider>
       <Appbar.Header>
-        <Appbar.Content title="Klasifikasi Gambar" subtitle="Menggunakan React Native & AI" />
+        <Appbar.Content title="Waste Classification" subtitle="Using React Native & AI" />
       </Appbar.Header>
-      <View style={styles.container}>
-        <Headline style={styles.headline}>Selamat Datang</Headline>
-        <Caption style={styles.caption}>Pilih atau ambil gambar, lalu klasifikasikan</Caption>
+
+      <ScrollView contentContainerStyle={styles.container}>
+        <Headline style={styles.headline}>Welcome</Headline>
+        <Caption style={styles.caption}>Select or capture an image, then classify it</Caption>
 
         <ImageSelector setImageUri={setImageUri} setClassificationResult={setClassificationResult} />
 
         {imageUri && (
           <Card style={styles.card}>
-            <Card.Title title="Gambar yang Dipilih" />
+            <Card.Title title="Selected Image" />
             <Card.Cover source={{ uri: imageUri }} style={styles.image} />
           </Card>
         )}
@@ -71,19 +76,19 @@ const ImageClassifier = () => {
             style={[styles.button, { backgroundColor: '#28a745' }]}
             disabled={!imageUri}
           >
-            Klasifikasikan Gambar
+            Classify Image
           </Button>
         )}
 
         <ImageResult classificationResult={classificationResult} />
-      </View>
+      </ScrollView>
     </PaperProvider>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1, // Ensures the content can grow beyond the screen size and be scrollable
     padding: 16,
   },
   headline: {

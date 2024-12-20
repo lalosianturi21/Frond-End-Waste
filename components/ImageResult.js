@@ -6,7 +6,7 @@ const ImageResult = ({ classificationResult }) => {
   return (
     classificationResult && (
       <Card style={styles.resultCard}>
-        <Card.Title title="Hasil Klasifikasi" />
+        <Card.Title title="Classification Result" />
         <Card.Content>
           <Paragraph>Class Name: {classificationResult.class_name}</Paragraph>
           <Paragraph>File: {classificationResult.file}</Paragraph>
