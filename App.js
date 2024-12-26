@@ -27,7 +27,7 @@ const ImageClassifier = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        'https://amh-project-backend-waste-8a2b6e4b7d57.herokuapp.com/upload',
+        'https://hrvit.animoe.my.id/upload',
         formData,
         {
           headers: {
@@ -73,7 +73,7 @@ const ImageClassifier = () => {
             mode="contained"
             icon="check"
             onPress={classifyImage}
-            style={[styles.button, { backgroundColor: '#28a745' }]}
+             style={[styles.button, { backgroundColor: 'green' }]} // Green button color
             disabled={!imageUri}
           >
             Classify Image

@@ -40,7 +40,7 @@ const ImageSelector = ({ setImageUri, setClassificationResult }) => {
         <Button
           mode="contained"
           icon="image"
-          style={styles.button}
+           style={[styles.button, { backgroundColor: 'green' }]} // Green button color
           onPress={selectImage}
         >
           Select from Gallery
@@ -48,7 +48,7 @@ const ImageSelector = ({ setImageUri, setClassificationResult }) => {
         <Button
           mode="contained"
           icon="camera"
-          style={styles.button}
+           style={[styles.button, { backgroundColor: 'green' }]} // Green button color
           onPress={captureImage}
         >
           Take from Camera

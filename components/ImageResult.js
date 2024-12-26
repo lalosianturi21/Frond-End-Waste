@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { Card, Paragraph, Text } from 'react-native-paper';
 
 const ImageResult = ({ classificationResult }) => {
+
   return (
     classificationResult && (
       <Card style={styles.resultCard}>
